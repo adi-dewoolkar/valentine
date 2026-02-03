@@ -1,3 +1,4 @@
+
 body {
       margin: 0;
       height: 100vh;
@@ -5,33 +6,49 @@ body {
       justify-content: center;
       align-items: center;
       background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      font-family: 'Segoe UI', sans-serif;
+      font-family: "Dancing Script", cursive;
     }
-
+    #heartCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* behind everything */
+    pointer-events: none; /* clicks go through */
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    }
     .card {
-      background: white;
+      background: #ffe4e9;
       padding: 40px;
+      border: 1px solid rgba(255, 105, 135, 0.15);
       border-radius: 20px;
       text-align: center;
       box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-      width: 420px;
+      width: 600px;
+      height: auto;
       position: relative;
+      z-index: 1;
+      
     }
 
-    h1 {
+    .card h1 {
       color: #e63946;
       margin-bottom: 10px;
+      font-family: "Damion" , cursive;
+      font-weight: 400;
+      font-size: 72px;
+      align-items: center;
     }
 
-    p {
-      font-size: 18px;
+    #Q {
+      font-size: 40px;
       margin-bottom: 20px;
+      font-family: "Dancing Script", cursive;
     }
-
-    .counter {
-      font-size: 16px;
-      margin-bottom: 25px;
-      color: #555;
+    #hint{
+      font-size: 28px;
+      color:red;
     }
 
     button {
@@ -51,5 +68,45 @@ body {
 
     #no {
       background-color: #ddd;
+    
  
     }
+    .success-card{
+        background-color: #ffe4e9;
+        padding : "50px";
+        border-radius : "20px";
+        animation: pop
+    }
+    @keyframes heartbeat{
+    0%, 100% { transform: scale(1); }
+    /* 25% { transform: scale(1.1); } */
+    50% { transform: scale(1.2); }
+    /* 75% { transform: scale(1.1); } */
+    }
+    .success-card h1{
+      animation: heartbeat 2s infinite;
+      font-family:"Dancing Script";
+      color: #e63946;
+      font-size: 48px;
+    }
+    .success-card p{
+      font-family: "Dancing Script";
+      font-size: 32px ;
+    }
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .success-image{
+      width: 240px;         /* adjust as needed */
+      max-width: 80%;       /* responsive on smaller screens */
+      margin-top: 20px;     /* space below text */
+      border-radius: 15px;  /* optional, soft corners */
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      animation: pop 0.5s ease-out;
+    }
+    
+
+
+    
+

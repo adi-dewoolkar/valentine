@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Be My Valentine?</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="card" id="card">
+    <h1>Hey my love 💕</h1>
+    <p>Will you be my Valentine?</p>
+
+    <p id="hint" class="hint"></p>
+
+    <button id="yes">Yes 💖</button>
+    <button id="no">No 🙈</button>
+  </div>
+
+  <script>
+    const noButton = document.getElementById("no");
+    const yesButton = document.getElementById("yes");
+    const card = document.getElementById("card");
+    const hint = document.getElementById("hint");
+
+    let attempts = 0;
+    let converted = false;
+    let positioned = false;
+    // initial position
+    noButton.style.left = "220px";
+    noButton.style.top = "260px";
+
+    noButton.addEventListener("mouseenter", () => {
+      attempts++;
+      showHint();
+      
+      if (!positioned){
+        const rect = noButton.getBoundingClientRect();
+        const cardRect = card.getBoundingClientRect();
+
+        noButton.style.position = 'absolute';
+        noButton.style.left = `${rect.left - cardRect.left}px`;
+        noButton.style.top = `${rect.top - cardRect.top}px`;
+
+        positioned = true;
+      }
+      if (attempts >= 10){
+        convertToYes();
+        return;
+      }
+
+      moveButton();
+
+      
+    });
+    function moveButton(){
+        const cardRect = card.getBoundingClientRect();
+        const btnRect = noButton.getBoundingClientRect();
+
+        const maxX = cardRect.width - btnRect.width;
+        const maxY = cardRect.height - btnRect.height;
+
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
+        
+        noButton.style.left = `${x}px`;
+        noButton.style.top = `${y}px`;
+    }
+    function showHint() {
+
+      if (attempts === 3) hint.textContent = "Don't follow this button please 😇";
+      if (attempts === 7) hint.textContent = "Just click Yes already 😭";
+      if (attempts === 10) hint.textContent = "There's only one right answer 😈";
+
+    }
+
+    function convertToYes(){
+        converted = true;
+        noButton.textContent = "Yes 💖";
+        noButton.id = "yes";
+        noButton.style.backgroundColor = "#e63946";
+        noButton.style.color = "white";
+        noButton.style.position = "static";
+        noButton.style.marginLeft = "10px";
+        noButton.style.cursor = "pointer";
+
+        noButton.addEventListener("click",()=>{
+            triggerYes();
+        })
+    }
+
+    function triggerYes(){
+      document.body.innerHTML = `
+        <div style="
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+          font-family: 'Segoe UI', sans-serif;
+          text-align: center;
+        ">
+          <h1 style="color:#e63946;">
+            SHE SAID YES!!! 💘💘💘 <br><br>
+            Best Valentine ever ❤️
+          </h1>
+        </div>
+      `;
+    }
+    yesButton.addEventListener("click", () => {
+        triggerYes();
+    });
+  </script>
+
+</body>
+</html>
